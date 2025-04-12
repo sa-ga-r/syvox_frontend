@@ -1,8 +1,8 @@
-function tts(){
+const TTS = () => {
     return (
         <div>
             <p>TTS Jobs</p>
         </div>
     );
 }
-export default tts;
+export default TTS;

@@ -1,8 +1,8 @@
-function stt(){
+const STT = () => {
     return (
         <div>
             <p>STT Jobs</p>
         </div>
     );
 }
-export default stt;
+export default STT;
