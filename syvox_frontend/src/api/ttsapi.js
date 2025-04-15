@@ -1,6 +1,6 @@
 const BASE_URL = "/api/";
 
-export const fetchTTSJob = () => {
+export const fetchTTSJobs = () => {
     return fetch(`${BASE_URL}tts_jobs/`)
     .then(res => res.json())
     .then(data => data.json)

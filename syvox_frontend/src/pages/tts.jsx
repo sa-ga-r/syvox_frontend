@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import Topbar from './components/Topbar';
-import Navbar from './components/Navbar';
-import Form from './components/Form';
-import DataTable from './components/DataTable';
+import TopBar from './components/topbar';
+import NavBar from './components/bavbar';
+import Form from './components/form';
+import DataTable from './components/datatable';
 import {
     createTTSJob,
     deleteTTSJob,
     fetchTTSJobs,
     processTTSJob
-} from './api/ttsApi';
+} from './api/ttsapi';
 
 const TTS = () => {
     const [jobs, setJobs] = useState([]);
@@ -39,9 +39,9 @@ const TTS = () => {
 
     return (
         <div className="page-container">
-            <Topbar />
+            <TopBar />
             <div className="main-content">
-                <Navbar />
+                <NavBar />
                 <div className="content-area">
                     <h1 className="page-title">Text to Speech [TTS]</h1>
                     <Form onCreate={handleCreate} />
