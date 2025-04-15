@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import NavBar from '../components/navbar';
 import TopBar from '../components/topbar';
 import DataTable from '../components/datatable';
@@ -7,6 +8,7 @@ import { fetchSTTJobs, fetchTTSJobs } from '../api/dashboardapi';
 const Dashboard = () => {
     const [sttJobs, setSttJobs] = useState([]);
     const [ttsJobs, setTtsJobs] = useState([]);
+    const location = useLocation(); // Listen for path changes
 
     const loadJobs = () => {
         fetchSTTJobs().then(data => setSttJobs(data.jobs));
@@ -15,7 +17,7 @@ const Dashboard = () => {
 
     useEffect(() => {
         loadJobs();
-    }, []);
+    }, [location.pathname]); // Reload on route change
 
     const handleDelete = (id, type) => {
         const url = type === 'TTS' ? `/tts_delete_job/${id}/` : `/stt_delete_job/${id}/`;
