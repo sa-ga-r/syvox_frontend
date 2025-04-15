@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import NavBar from '.components/navbar';
-import TopBar from '.components/topbar';
-import DataTable from '.components./datatable';
-import { fetchSTTJobs, fetchTTSJobs } from './api/dashboardapi';
+import NavBar from '../components/navbar';
+import TopBar from '../components/topbar';
+import DataTable from '../components/datatable';
+import { fetchSTTJobs, fetchTTSJobs } from '../api/dashboardapi';
 
 const Dashboard = () => {
     const [sttJobs, setSttJobs] = useState([]);

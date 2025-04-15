@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import NavBar from '.components/navbar';
-import TopBar from '.components/topbar';
-import Form from '.components/form';
-import DataTable from '.components/datatable';
-import { fetchSTTJobs, createSTTJob, processSTTJob, deleteSTTJob } from './api/sttapi';
+import NavBar from '../components/navbar';
+import TopBar from '../components/topbar';
+import Form from '../components/form';
+import DataTable from '../components/datatable';
+import { fetchSTTJobs, createSTTJob, processSTTJob, deleteSTTJob } from '../api/sttapi';
 
 const STT = () => {
     const [jobs, setJobs] = useState([]);
