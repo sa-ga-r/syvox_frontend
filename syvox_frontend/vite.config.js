@@ -6,7 +6,8 @@ export default defineConfig({
   plugins: [react()],
   server:{
     proxy:{
-      '/api':'',
+      '/stt_api':'',
+      '/tts_api':'',
     }
   }
 })
