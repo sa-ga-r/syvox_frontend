@@ -40,7 +40,7 @@ export const processTTSJob = (jobid) => {
 };
 
 export const deleteTTSJob = (jobid) => {
-    return fetch(`${BASE_URL}tts_delete_job/${jobid}/` {
+    return fetch(`${BASE_URL}tts_delete_job/${jobid}/`, {
         method : "DELETE",
     })
     .then(res => res.json())
