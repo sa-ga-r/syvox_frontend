@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
-import Topbar from '../components/Topbar';
-import Navbar from '../components/Navbar';
-import Form from '../components/Form';
-import DataTable from '../components/DataTable';
+import Topbar from './components/Topbar';
+import Navbar from './components/Navbar';
+import Form from './components/Form';
+import DataTable from './components/DataTable';
 import {
     createTTSJob,
     deleteTTSJob,
     fetchTTSJobs,
     processTTSJob
-} from '../api/ttsApi';
+} from './api/ttsApi';
 
 const TTS = () => {
     const [jobs, setJobs] = useState([]);
