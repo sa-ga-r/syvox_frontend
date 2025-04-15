@@ -1,5 +1,7 @@
+const BASE_URL = "/api/";
+
 export const fetchSTTJobs = () => {
-    return fetch('/stt_jobs/')
+    return fetch(`${BASE_URL}stt_jobs/`)
         .then(res => res.json())
         .then(data => data.jobs);
 };
@@ -12,7 +14,7 @@ export const createSTTJob = (jobName, description, file) => {
         formData.append("upload_file", file);
     }
 
-    return fetch('/stt_create_job/', {
+    return fetch(`${BASE_URL}stt_create_job/`, {
         method: 'POST',
         body: formData
     })
@@ -20,14 +22,14 @@ export const createSTTJob = (jobName, description, file) => {
 };
 
 export const processSTTJob = (jobId) => {
-    return fetch(`/gen_stt/${jobId}/`, {
+    return fetch(`${BASE_URL}gen_stt/${jobId}/`, {
         method: 'POST'
     })
         .then(res => res.json());
 };
 
 export const deleteSTTJob = (jobId) => {
-    return fetch(`/stt_delete_job/${jobId}/`, {
+    return fetch(`${BASE_URL}stt_delete_job/${jobId}/`, {
         method: 'DELETE'
     })
         .then(res => res.json());
