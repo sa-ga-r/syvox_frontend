@@ -8,6 +8,7 @@ const DataTable = ({ rows = [], type, onDelete, onProcess }) => {
                 <thead>
                     <tr>
                         <th>#</th>
+                        <th>Job Type</th>
                         <th>Job Name</th>
                         <th>Description</th>
                         <th>Created Date</th>
@@ -23,6 +24,7 @@ const DataTable = ({ rows = [], type, onDelete, onProcess }) => {
                         rows.map((job, index) => (
                             <tr key={job.id}>
                                 <td>{index + 1}</td>
+                                <td>{job.type}</td>
                                 <td>{job.job_name}</td>
                                 <td>{job.description?.substring(0, 20)}...</td>
                                 <td>{job.created_date}</td>
