@@ -1,7 +1,7 @@
 const BASE_URL = "/api/";
 
 export const fetchTTSJobs = () => {
-    return fetch(`${BASE_URL}tts_jobs/`)
+    return fetch(`${BASE_URL}TTS/`)
     .then(res => res.json())
     .then(data => data.json)
     .catch(error => {
