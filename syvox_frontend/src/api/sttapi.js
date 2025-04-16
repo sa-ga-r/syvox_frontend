@@ -1,7 +1,7 @@
 const BASE_URL = "/api/";
 
 export const fetchSTTJobs = () => {
-    return fetch(`${BASE_URL}stt_jobs/`)
+    return fetch(`${BASE_URL}STT/`)
         .then(res => res.json())
         .then(data => data.jobs);
 };
