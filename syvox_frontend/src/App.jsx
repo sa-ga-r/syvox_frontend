@@ -8,6 +8,7 @@ function App(){
   return (
     <Routes>
       <Route path="/" element = {<Dashboard />} />
+      <Route path='/dashboard' element = {<Dashboard />} />
       <Route path="/stt" element = {<STT />} />
       <Route path="/tts" element = {<TTS />} />
     </Routes>
