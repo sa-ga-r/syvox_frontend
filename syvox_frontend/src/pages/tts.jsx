@@ -4,54 +4,49 @@ import NavBar from '../components/navbar';
 import Form from '../components/form';
 import DataTable from '../components/datatable';
 import {
-    createTTSJob,
-    deleteTTSJob,
     fetchTTSJobs,
-    processTTSJob
-} from '../api/ttsapi';
+    createTTSJob,
+    processTTSJob,
+    deleteTTSJob
+} from '../api/ttsapi'; // make sure this file path is correct
 
 const TTS = () => {
-    const [jobs, setJobs] = useState([]);
+    const [ttsJobs, setTtsJobs] = useState([]);
 
-    const loadJobs = async () => {
-        const fetchedJobs = await fetchTTSJobs();
-        setJobs(fetchedJobs);
+    const loadJobs = () => {
+        fetchTTSJobs().then(data => setTtsJobs(data));
+    };
+
+    const handleCreate = (jobName, description) => {
+        createTTSJob(jobName, description).then(() => loadJobs());
+    };
+
+    const handleDelete = (id) => {
+        deleteTTSJob(id).then(() => loadJobs());
+    };
+
+    const handleProcess = (id) => {
+        processTTSJob(id).then(() => loadJobs());
     };
 
     useEffect(() => {
         loadJobs();
     }, []);
 
-    const handleCreate = async (jobName, description) => {
-        await createTTSJob(jobName, description);
-        loadJobs();
-    };
-
-    const handleDelete = async (jobId) => {
-        await deleteTTSJob(jobId);
-        loadJobs();
-    };
-
-    const handleProcess = async (jobId) => {
-        await processTTSJob(jobId);
-        loadJobs();
-    };
-
     return (
-        <div className="page-container">
+        <div>
             <TopBar />
-            <div className="main-content">
-                <NavBar />
-                <div className="content-area">
-                    <h1 className="page-title">Text to Speech [TTS]</h1>
-                    <Form onCreate={handleCreate} />
-                    <DataTable
-                        type="TTS"
-                        rows={jobs}
-                        onDelete={handleDelete}
-                        onProcess={handleProcess}
-                    />
-                </div>
+            <NavBar />
+            <div className="tts-page" style={{ padding: '2rem' }}>
+                <h2>Create Text-to-Speech Job</h2>
+                <Form onCreate={handleCreate} />
+                <h2 style={{ marginTop: '3rem' }}>Existing Jobs</h2>
+                <DataTable
+                    rows={ttsJobs}
+                    type="TTS"
+                    onDelete={handleDelete}
+                    onProcess={handleProcess}
+                />
             </div>
         </div>
     );
