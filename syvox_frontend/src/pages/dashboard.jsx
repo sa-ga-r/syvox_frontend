@@ -6,18 +6,28 @@ import DataTable from '../components/datatable';
 import { fetchSTTJobs, fetchTTSJobs } from '../api/dashboardapi';
 
 const Dashboard = () => {
-    const [sttJobs, setSttJobs] = useState([]);
-    const [ttsJobs, setTtsJobs] = useState([]);
-    const location = useLocation(); // Listen for path changes
+    const [jobs, setJobs] = useState([]);
+    const location = useLocation();
 
-    const loadJobs = () => {
-        fetchSTTJobs().then(data => setSttJobs(data.jobs));
-        fetchTTSJobs().then(data => setTtsJobs(data.jobs));
+    const loadJobs = async () => {
+        try {
+            const [sttData, ttsData] = await Promise.all([fetchSTTJobs(), fetchTTSJobs()]);
+
+            const sttJobs = (sttData.jobs || []).map(job => ({ ...job, type: 'STT' }));
+            const ttsJobs = (ttsData.jobs || []).map(job => ({ ...job, type: 'TTS' }));
+
+            const combined = [...sttJobs, ...ttsJobs];
+            combined.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+
+            setJobs(combined);
+        } catch (error) {
+            console.error('Error loading jobs:', error);
+        }
     };
 
     useEffect(() => {
         loadJobs();
-    }, [location.pathname]); // Reload on route change
+    }, [location.pathname]);
 
     const handleDelete = (id, type) => {
         const url = type === 'TTS' ? `/tts_delete_job/${id}/` : `/stt_delete_job/${id}/`;
@@ -38,20 +48,12 @@ const Dashboard = () => {
             <TopBar />
             <NavBar />
             <div className="dashboard">
-                <h2>Text-to-Speech Jobs</h2>
+                <h2>All Jobs</h2>
                 <DataTable
-                    rows={ttsJobs}
-                    type="TTS"
-                    onDelete={(id) => handleDelete(id, 'TTS')}
-                    onProcess={(id) => handleProcess(id, 'TTS')}
-                />
-
-                <h2 style={{ marginTop: '2rem' }}>Speech-to-Text [STT]</h2>
-                <DataTable
-                    rows={sttJobs}
-                    type="STT"
-                    onDelete={(id) => handleDelete(id, 'STT')}
-                    onProcess={(id) => handleProcess(id, 'STT')}
+                    rows={jobs}
+                    typeColumn={true}
+                    onDelete={(id, type) => handleDelete(id, type)}
+                    onProcess={(id, type) => handleProcess(id, type)}
                 />
             </div>
         </div>
