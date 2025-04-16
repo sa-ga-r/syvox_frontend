@@ -8,7 +8,7 @@ import {
     createTTSJob,
     processTTSJob,
     deleteTTSJob
-} from '../api/ttsapi'; // make sure this file path is correct
+} from '../api/ttsapi';
 
 const TTS = () => {
     const [ttsJobs, setTtsJobs] = useState([]);
